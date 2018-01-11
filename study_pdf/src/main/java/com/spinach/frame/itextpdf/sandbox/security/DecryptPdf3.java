@@ -11,7 +11,11 @@ import com.itextpdf.text.pdf.PdfStamper;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
+/**
+ * 只读变可控。
+ * @author:whh
+ * @date:2018年1月11日下午6:24:26
+ */
 public class DecryptPdf3 {
 
     class MyReader extends PdfReader {

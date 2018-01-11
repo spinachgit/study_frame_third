@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.Iterator;
-import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -24,7 +23,6 @@ import org.apache.pdfbox.pdmodel.interactive.documentnavigation.outline.PDDocume
 import org.apache.pdfbox.pdmodel.interactive.documentnavigation.outline.PDOutlineItem;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.apache.pdfbox.text.PDFTextStripper;
-import com.spinach.jdk.utils.FileUtils;
 
 /**
  * <p>
@@ -73,7 +71,7 @@ public class PDFBoxNewDemo {
 	
 	private static void writeToPdf(String contentStr,String pdfPath) throws IOException {
 		FileInputStream inputs = new FileInputStream("D:\\pdf\\index.txt");
-		String temp = FileUtils.readStream(inputs);
+		String temp = "hello world!" ;//FileUtils.readStream(inputs); 从文件中读取文件，再导入到PDF中。
 		System.out.println(temp);
 		try {
 			File file = new File(pdfPath);

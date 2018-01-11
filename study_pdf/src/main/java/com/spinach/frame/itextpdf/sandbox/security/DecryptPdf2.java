@@ -12,9 +12,16 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+/**
+ * 引例演示：只读PDF的操作。
+ * 此例：打开只读PDF变成另一个只读文档。
+ * @author:whh
+ * @date:2018年1月11日下午6:14:42
+ */
 public class DecryptPdf2 {
 
-    public static final String SRC = "src/main/webapp/resources/itextpdf/pdfs/hello_encrypted2.pdf";
+    //public static final String SRC = "src/main/webapp/resources/itextpdf/pdfs/hello_encrypted2.pdf";
+    public static final String SRC = "src/main/webapp/resources/itextpdf/pdfs/lock.pdf";
     public static final String DEST = "results/security/hello2.pdf";
     
     public static void main(String[] args) throws IOException, DocumentException {

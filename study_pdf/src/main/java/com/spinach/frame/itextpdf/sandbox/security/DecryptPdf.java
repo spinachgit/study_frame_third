@@ -12,6 +12,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+/**
+ * 加密文件的处理 PdfReader(src,"passworld".getBytes());
+ * @author:whh
+ * @date:2018年1月11日下午4:47:49
+ */
 public class DecryptPdf {
 
     public static final String SRC = "src/main/webapp/resources/itextpdf/pdfs/hello_encrypted.pdf";
