@@ -44,7 +44,7 @@ public class D10_FillTemplate4 {
         // step 4
         ColumnText ct = new ColumnText(writer.getDirectContent());
         ct.setSimpleColumn(template.getBody());
-	ElementList elements = FillTemplateHelper.parseHtml(XML, CSS, getTagProcessorFactory());
+        ElementList elements = FillTemplateHelper.parseHtml(XML, CSS, getTagProcessorFactory());
         int status;
         float yLine;
         for (Element e : elements) {

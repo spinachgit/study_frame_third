@@ -13,15 +13,15 @@ import java.io.IOException;
 
 public class D07_FillTemplate1 {
 
-    public static final String DEST = "results/pdftemplates/report1.pdf";
+    public static final String DEST = "results/pdftemplates/report_aa.pdf";
     public static final String PDF = "src/main/webapp/resources/itextpdf/pdfs/stationery.pdf";
     public static final String HTML = "src/main/webapp/resources/itextpdf/xml/movies.html";
     public static final String CSS = "src/main/webapp/resources/itextpdf/xml/style1.css";
     
     public void createPdf(String result) throws IOException, DocumentException {
         FillTemplateHelper template = new FillTemplateHelper(PDF);
-        template.setSender("Bruno Lowagie\nAdolf Baeyensstraat 121\n9040 Sint-Amandsberg\nBELGIUM");
-        template.setReceiver("iText Software Corp.\nCambridge Innovation Center\n1 Broadway, 14th Floor\nCambridge, MA 02142 USA");
+        //template.setSender("Bruno Lowagie\nAdolf Baeyensstraat 121\n9040 Sint-Amandsberg\nBELGIUM");
+        //template.setReceiver("iText Software Corp.\nCambridge Innovation Center\n1 Broadway, 14th Floor\nCambridge, MA 02142 USA");
         // step 1
         Document document = new Document(template.getPageSize(),
             template.getmLeft(), template.getmRight(), template.getmTop(), template.getmBottom());
@@ -31,10 +31,13 @@ public class D07_FillTemplate1 {
         // step 3
         document.open();
         // step 4
-        ElementList elements = FillTemplateHelper.parseHtml(HTML, CSS, Tags.getHtmlTagProcessorFactory());
+        /** method1 **/
+        /*ElementList elements = FillTemplateHelper.parseHtml(HTML, CSS,Tags.getHtmlTagProcessorFactory());
         for (Element e : elements) {
             document.add(e);
-        }
+        }*/
+        /** method2 **/
+        FillTemplateHelper.parseHtml2(document,writer,HTML, CSS);
         // step 5
         document.close();
     }

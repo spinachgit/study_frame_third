@@ -30,10 +30,12 @@ import com.itextpdf.tool.xml.XMLWorkerHelper;
 import com.itextpdf.tool.xml.css.CssFile;
 import com.itextpdf.tool.xml.css.StyleAttrCSSResolver;
 import com.itextpdf.tool.xml.html.TagProcessorFactory;
+import com.itextpdf.tool.xml.html.Tags;
 import com.itextpdf.tool.xml.parser.XMLParser;
 import com.itextpdf.tool.xml.pipeline.css.CSSResolver;
 import com.itextpdf.tool.xml.pipeline.css.CssResolverPipeline;
 import com.itextpdf.tool.xml.pipeline.end.ElementHandlerPipeline;
+import com.itextpdf.tool.xml.pipeline.end.PdfWriterPipeline;
 import com.itextpdf.tool.xml.pipeline.html.HtmlPipeline;
 import com.itextpdf.tool.xml.pipeline.html.HtmlPipelineContext;
 
@@ -160,15 +162,15 @@ public class FillTemplateHelper extends PdfPageEventHelper {
         ColumnText.showTextAligned(total, Element.ALIGN_LEFT, p, 0.5f, 0, 0);
     }
 
-    public static ElementList parseHtml(String content, String style, TagProcessorFactory tagProcessors) throws IOException {
+    public static ElementList parseHtml(String htmlPath, String cssPath,TagProcessorFactory tagProcessors) throws IOException {
         // CSS
         CSSResolver cssResolver = new StyleAttrCSSResolver();
-        CssFile cssFile = XMLWorkerHelper.getCSS(new FileInputStream(style));
+        CssFile cssFile = XMLWorkerHelper.getCSS(new FileInputStream(cssPath));
         cssResolver.addCss(cssFile);
         // HTML
         HtmlPipelineContext htmlContext = new HtmlPipelineContext(null);
         htmlContext.setTagFactory(tagProcessors);
-        htmlContext.autoBookmark(false);
+        htmlContext.autoBookmark(true);
         // Pipelines
         ElementList elements = new ElementList();
         ElementHandlerPipeline end = new ElementHandlerPipeline(elements, null);
@@ -177,7 +179,29 @@ public class FillTemplateHelper extends PdfPageEventHelper {
         // XML Worker
         XMLWorker worker = new XMLWorker(css, true);
         XMLParser p = new XMLParser(worker);
-        p.parse(new FileInputStream(content));
+        p.parse(new FileInputStream(htmlPath));
         return elements;
+    }
+    
+    public static void parseHtml2(Document document, PdfWriter writer,String htmlPath, String cssPath) throws IOException {
+    	// CSS
+        CSSResolver cssResolver = new StyleAttrCSSResolver();
+        CssFile cssFile = XMLWorkerHelper.getCSS(new FileInputStream(cssPath));
+        cssResolver.addCss(cssFile);
+        
+        // HTML
+        HtmlPipelineContext htmlContext = new HtmlPipelineContext(null);
+        htmlContext.setTagFactory(Tags.getHtmlTagProcessorFactory());
+        htmlContext.autoBookmark(true);
+        
+        // Pipelines
+        PdfWriterPipeline pdf = new PdfWriterPipeline(document, writer);
+        HtmlPipeline html = new HtmlPipeline(htmlContext, pdf);
+        CssResolverPipeline css = new CssResolverPipeline(cssResolver, html);
+        
+        // XML Worker
+        XMLWorker worker = new XMLWorker(css, true);
+        XMLParser p = new XMLParser(worker);
+        p.parse(new FileInputStream(htmlPath));
     }
 }
