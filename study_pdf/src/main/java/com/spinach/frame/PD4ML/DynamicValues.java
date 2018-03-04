@@ -24,7 +24,7 @@ public class DynamicValues {
 	public static void main(String[] args) {
 		try {
 			DynamicValues jt = new DynamicValues();
-			jt.doConversion("http://pd4ml.com/index.htm", pd4mlUtil.basePath+"/result/pd4ml.pdf");
+			jt.doConversion("http://pd4ml.com/index.htm", Pd4mlUtil.basePath+"/result/pd4ml.pdf");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

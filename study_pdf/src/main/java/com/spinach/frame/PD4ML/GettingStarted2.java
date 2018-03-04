@@ -24,8 +24,8 @@ public class GettingStarted2 {
 	public static void main(String[] args) {
 		try {
 			GettingStarted2 jt = new GettingStarted2();
-			String html = readFile(pd4mlUtil.basePath+"/result01.html", "UTF-8");
-			jt.doConversion2(html, pd4mlUtil.basePath+"/result/pd4ml02.pdf");
+			String html = readFile(Pd4mlUtil.basePath+"/result01.html", "UTF-8");
+			jt.doConversion2(html, Pd4mlUtil.basePath+"/result/pd4ml02.pdf");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

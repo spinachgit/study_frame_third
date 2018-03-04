@@ -19,7 +19,7 @@ public class GettingStarted1 {
 	public static void main(String[] args) {
 		try {
 			GettingStarted1 jt = new GettingStarted1();
-			jt.doConversion("http://pd4ml.com/sample.htm",pd4mlUtil.basePath+"/pd4ml01.pdf");
+			jt.doConversion("http://pd4ml.com/sample.htm",Pd4mlUtil.basePath+"/pd4ml01.pdf");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

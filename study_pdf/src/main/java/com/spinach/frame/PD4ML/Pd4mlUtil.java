@@ -16,13 +16,13 @@ import org.zefer.pd4ml.PD4PageMark;
 import com.spinach.frame.utils.FileUtils;
 import com.spinach.frame.utils.StringUtils;
 
-public class pd4mlUtil {
+public class Pd4mlUtil {
 	public static String basePath = "src/test/resources/pdf";
 	public static String HTML = "src/main/webapp/resources/itextpdf/xml/movies.html";
 	public static void main(String[] args) throws Exception {
 //		htmlToPdf(basePath+"/movies.html",new File(basePath+"/result/out05.pdf"),basePath+"/style1.css");
 //		htmlToPdf(basePath+"/movies.html",new File(basePath+"/result/out06.pdf"),basePath+"/style2.css");
-		htmlToPdf(basePath+"/movies.html",new File(basePath+"/result/out07aaa.pdf"),basePath+"/style3.css");
+		htmlToPdf(basePath+"/movies.html",new File(basePath+"/result/out074.pdf"),basePath+"/style2.css");
 		//htmlToPdf(basePath+"/movies.html",new File(basePath+"/result/out08.pdf"),basePath+"/style4.css");
 		//contentToPdf("aaa", basePath+"/result/out01.pdf",basePath+"/music.css");
 		//htmlToPdf(basePath+"/result01.html",basePath+"/result/out03.pdf",basePath+"/music.css");
@@ -54,32 +54,33 @@ public class pd4mlUtil {
 		/**
 		 * 字体文件设置
 		 */
-		//pd4ml.useTTF("fonts", true);  
+		/** 相当于使用：jar包中的字体文件，JAR包中的字体文件，要包含：pd4fonts.properties文件，对指定对应的key-value:名称和字体文件名映射 **/
+		//pd4ml.useTTF("fonts", true); 
+		
+		/**  指定系统字体文件夹:注意这个字体是绝对路径，相对路径，会找不到对应的路径 也可以自定义字体文件   **/
 		//pd4ml.useTTF("/Library/Fonts", true); //指定系统字体文件夹
-		//pd4ml.useTTF("/Library/Fonts/Microsoft", true); //指定系统字体文件夹
-		pd4ml.useTTF("src/main/resources/pd4ml_fonts/fonts", true); //指定系统字体文件夹
-		//pd4ml.setDefaultTTFs("SimHei", "Arial", "Courier New");
-		//pd4ml.setDefaultTTFs("Monacow", "Arial", "Courier New"); //Georgia Microsoft Yahei
-		pd4ml.setDefaultTTFs("Calibri_Bold_Italic", "Songti", "Monacow"); //StXingKa
+		pd4ml.useTTF("/Library/Fonts/Microsoft", true); //指定系统字体文件夹
+		//pd4ml.useTTF("/System/Library/Fonts", true); //指定系统字体文件夹
+		/** 第一个表示：默认字体，第二个：可以对HTML文件中CSS设置的字体 **/
+		//STZHONGS:华文中宋   华文琥珀:STHUPO(经过测试：中文乱码)  华文行楷：STXINGKA 微软雅黑：Microsoft Yahei
+		pd4ml.setDefaultTTFs("Microsoft Yahei", "Georgia", "Monacow"); //StXingKa
 		
 		pd4ml.enableDebugInfo();
 		/** 生成文件目录 **/
 		pd4ml.generateOutlines(true);
 
 		/** 生成对应的页眉页脚 **/
-		////AAAAAAAAAAAAAAAAAAAAA
 		PD4PageMark header = new PD4PageMark();
 		header.setHtmlTemplate("<div style=\"text-align: center;\">"
 				+ "<font style=\"color:#79a73a\"><strong>作者：whh qq:1043204960</strong></font><hr /></div>");
 		header.setAreaHeight(30); //设置标头的高度
 		pd4ml.setPageHeader(header);
-			
+		
 		PD4PageMark footer = new PD4PageMark();
 		footer.setHtmlTemplate("<div style=\"text-align: center;\"><hr style=\"background-color:#79a73a;\"/>"
 				+ "<font><strong style=\"color:red\"><i>page $[page] of $[total]</i></strong></font></div>");
 		footer.setAreaHeight(-1);
 		pd4ml.setPageFooter(footer);
-		pd4ml.setPageSize(PD4Constants.A4);
 		
 		return pd4ml;
 	}
